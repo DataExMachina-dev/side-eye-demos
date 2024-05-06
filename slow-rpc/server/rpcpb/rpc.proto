@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package rpcpb;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+message GetInfoRequest {
+  int32 ClientID = 1;
+  google.protobuf.Timestamp request_timestamp = 2;
+}
+
+message GetInfoResponse {
+  string Result = 1;
+  google.protobuf.Duration processing_time = 2;
+}
+
+service SideEyeDemo {
+  rpc GetInfo(GetInfoRequest) returns (GetInfoResponse) {};
+}
