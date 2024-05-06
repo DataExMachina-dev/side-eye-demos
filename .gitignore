@@ -1,0 +1,4 @@
+go.work
+# Binaries
+rpc-deadlock/client/client
+rpc-deadlock/server/server
