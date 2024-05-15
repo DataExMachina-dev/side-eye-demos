@@ -11,6 +11,9 @@ User=ubuntu
 ExecStart=/home/ubuntu/src/github.com/DataExMachina-dev/side-eye-demos/slow-rpc/client/client
 Restart=always
 RestartSec=10s
+# We're running this on a tiny VM, so let's de-prioritize this process in favor
+# of the agent so snapshots are fast.
+Nice=19
 
 [Install]
 WantedBy=multi-user.target
