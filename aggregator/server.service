@@ -1,0 +1,19 @@
+# Modify User= and the path in ExecStart=. I couldn't figure out how to get the
+# path to be relative to the user's home directory (%h is always /root).
+
+[Unit]
+Description=Server Process
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/home/ubuntu/src/github.com/DataExMachina-dev/side-eye-demos/aggregator/server/server
+Restart=always
+RestartSec=10s
+# We're running this on a tiny VM, so let's de-prioritize this process in favor
+# of the agent so snapshots are fast.
+Nice=19
+
+[Install]
+WantedBy=multi-user.target
