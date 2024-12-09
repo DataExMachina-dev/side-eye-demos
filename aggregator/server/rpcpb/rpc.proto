@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package rpcpb;
+
+message RecordRequest {
+  int64 client_id = 1;
+  repeated int64 records = 2;
+}
+
+message RecordResponse {}
+
+service Aggregator {
+  rpc Record(RecordRequest) returns (RecordResponse) {};
+}
