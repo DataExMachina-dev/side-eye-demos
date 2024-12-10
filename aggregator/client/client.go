@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	serverAddr = flag.String("server-addr", "localhost:6543", "The server address in as host:port")
+	serverAddr = flag.String("server-addr", "localhost:6544", "The server address in as host:port")
 )
 
 func main() {

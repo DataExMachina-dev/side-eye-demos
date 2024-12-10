@@ -15,12 +15,13 @@ import (
 )
 
 var (
-	grpcPort = flag.Int("port", 6543, "Port to serve gRPC on.")
+	grpcPort  = flag.Int("port", 6544, "Port to serve gRPC on.")
+	debugPort = flag.Int("debug-port", 6545, "Port to serve debug on.")
 )
 
 func main() {
 	go func() {
-		log.Println(http.ListenAndServe("localhost:5050", nil))
+		log.Println(http.ListenAndServe(fmt.Sprintf(":%d", *debugPort), nil))
 	}()
 
 	s := startServer()
