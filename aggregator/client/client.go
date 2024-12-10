@@ -52,9 +52,6 @@ func runClient(clientID int64, rpcClient rpcpb.AggregatorClient) {
 		})
 		if err != nil {
 			log.Printf("RPC failed: %s", err)
-		} else {
-			duration := time.Since(now.AsTime())
-			log.Printf("RPC took: %s", duration)
 		}
 		time.Sleep(40 * time.Millisecond)
 	}
