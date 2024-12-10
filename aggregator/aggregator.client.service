@@ -8,7 +8,7 @@ After=network.target
 [Service]
 Type=simple
 User=ubuntu
-ExecStart=/home/ubuntu/src/github.com/DataExMachina-dev/side-eye-demos/aggregator/client/client
+ExecStart=/home/ubuntu/src/github.com/DataExMachina-dev/side-eye-demos/aggregator/client/aggregator.client
 Restart=always
 RestartSec=10s
 # We're running this on a tiny VM, so let's de-prioritize this process in favor
