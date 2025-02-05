@@ -5,6 +5,7 @@ import (
 	"flag"
 	"log"
 	"math/rand/v2"
+	"net/http"
 	"sync"
 	"time"
 
@@ -12,6 +13,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/DataExMachina-dev/demos/aggregator/server/rpcpb"
+	_ "net/http/pprof"
 )
 
 var (
@@ -25,6 +27,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to dial server: %s", err)
 	}
+
+	go http.ListenAndServe(":8081", nil)
+
 	var wg sync.WaitGroup
 	for i := 0; i < numClients; i++ {
 		wg.Add(1)
