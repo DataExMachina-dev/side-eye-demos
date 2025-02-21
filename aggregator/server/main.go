@@ -31,10 +31,22 @@ func main() {
 
 	if *useLib {
 		log.Println("Using the side-eye-go library.")
-		// !!! buffers := []*bytes.Buffer{new(bytes.Buffer), new(bytes.Buffer), new(bytes.Buffer)}
 		grpclog.SetLoggerV2(grpclog.NewLoggerV2WithVerbosity(os.Stdout, os.Stdout, os.Stdout, 100))
-		if err := sideeye.Init(context.Background(), "aggregator-server"); err != nil {
+
+		logSideEyeError := func(err error) {
+			log.Printf("[side-eye-go] %s", err)
+		}
+		logSideEyeInfo := func(format string, args ...interface{}) {
+			log.Printf("[side-eye-go] "+format, args...)
+		}
+		if err := sideeye.Init(context.Background(),
+			"aggregator-server",
+			sideeye.WithErrorLogger(logSideEyeError),
+			sideeye.WithInfoLogger(logSideEyeInfo),
+		); err != nil {
 			log.Fatalf("Failed to initialize side-eye-go: %v", err)
+		} else {
+			log.Println("Initialized side-eye-go.")
 		}
 	}
 
