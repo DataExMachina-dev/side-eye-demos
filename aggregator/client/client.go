@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"github.com/DataExMachina-dev/side-eye-go/sideeye"
 	"log"
 	"math/rand/v2"
 	"net/http"
@@ -18,9 +19,17 @@ import (
 
 var (
 	serverAddr = flag.String("server-addr", "localhost:6544", "The server address in as host:port")
+	useLib     = flag.Bool("use-lib", false, "Use the side-eye-go library to connect to Side-Eye.")
 )
 
 func main() {
+	if *useLib {
+		log.Println("Using the side-eye-go library.")
+		if err := sideeye.Init(context.Background(), "aggregator-server"); err != nil {
+			log.Fatalf("Failed to initialize side-eye-go: %v", err)
+		}
+	}
+
 	const numClients = 5
 	log.Printf("Connecting to server at %s", *serverAddr)
 	rpcClient, err := dialServer(*serverAddr)
